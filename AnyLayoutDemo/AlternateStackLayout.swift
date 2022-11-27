@@ -13,30 +13,60 @@ import SwiftUI
   The `placeSubviews` method places each subview
   at a computed x, y location with a proposed size.
  */
-final class AlternateStackLayout: Layout {
-    private var maxEvenWidth = 0.0
-    private var sizes: [CGSize] = []
+struct AlternateStackLayout: Layout {
+    // This is used to share data between methods in the `Layout` protocol.
+    struct Cache {
+        let maxEvenWidth: CGFloat
+        let maxOddWidth: CGFloat
+        let sizes: [CGSize]
+    }
 
-    init() {}
+    func makeCache(subviews: Subviews) -> Cache {
+        // Get the size of each subview.
+        // The type is `[CGSize]`.
+        // `CGSize` has `width` and `height` properties.
+        let sizes = subviews.map { $0.sizeThatFits(.unspecified) }
+
+        // Get the maximum width of the even subviews
+        // and the maximum width of the odd subviews.
+        var maxEvenWidth = 0.0
+        var maxOddWidth = 0.0
+        var isEven = true
+        for size in sizes {
+            let width = size.width
+            if isEven {
+                if width > maxEvenWidth { maxEvenWidth = width }
+            } else {
+                if width > maxOddWidth { maxOddWidth = width }
+            }
+            isEven.toggle()
+        }
+
+        return Cache(
+            maxEvenWidth: maxEvenWidth,
+            maxOddWidth: maxOddWidth,
+            sizes: sizes
+        )
+    }
 
     func placeSubviews(
         in bounds: CGRect,
-        proposal: ProposedViewSize, // TODO: How can this be used?
+        proposal: ProposedViewSize, // seems to be the entire screen size
         subviews: Subviews,
-        cache: inout () // TODO: How can this be used?
+        cache: inout Cache
     ) {
         // If there are no subviews then there is no work to be done.
-        guard !subviews.isEmpty else { return }
+        // guard !subviews.isEmpty else { return }
 
         // Determine the `x` values for even and odd subviews.
         let evenX = bounds.minX
-        let oddX = bounds.minX + maxEvenWidth
+        let oddX = bounds.minX + cache.maxEvenWidth
 
         // Determine the `y` value of the first subview.
         var y = bounds.minY
 
         var x = evenX
-        for (subview, size) in zip(subviews, sizes) {
+        for (subview, size) in zip(subviews, cache.sizes) {
             subview.place(
                 at: CGPoint(x: x, y: y),
                 anchor: .topLeading,
@@ -53,37 +83,13 @@ final class AlternateStackLayout: Layout {
     }
 
     func sizeThatFits(
-        proposal: ProposedViewSize, // TODO: How can this be used?
+        proposal: ProposedViewSize, // seems to be the entire screen size
         subviews: Subviews,
-        cache: inout () // TODO: How can this be used?
+        cache: inout Cache
     ) -> CGSize {
-        // If there are no subviews then the size is zero.
-        guard !subviews.isEmpty else { return .zero }
-
-        // Get the size of each subview.
-        // The type is `[CGSize]`.
-        // `CGSize` has `width` and `height` properties.
-        sizes = subviews.map { $0.sizeThatFits(.unspecified) }
-
-        // Get the maximum width of the even subviews
-        // and the maximum width of the odd subviews.
-        maxEvenWidth = 0.0
-        var maxOddWidth = 0.0
-        var isEven = true
-        for size in sizes {
-            let width = size.width
-            if isEven {
-                if width > maxEvenWidth { maxEvenWidth = width }
-            } else {
-                if width > maxOddWidth { maxOddWidth = width }
-            }
-            isEven.toggle()
-        }
-
-        // Return the required container size.
-        return CGSize(
-            width: maxEvenWidth + maxOddWidth,
-            height: sizes.map { $0.height }.reduce(0, +)
+        subviews.isEmpty ? .zero : CGSize(
+            width: cache.maxEvenWidth + cache.maxOddWidth,
+            height: cache.sizes.map { $0.height }.reduce(0, +)
         )
     }
 }
