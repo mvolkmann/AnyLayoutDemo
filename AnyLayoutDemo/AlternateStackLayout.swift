@@ -6,12 +6,6 @@ import SwiftUI
   Subviews that have even indexes (0, 2, ...) are left-aligned.
   Subviews that have odd indexes (1, 3, ...) are also left-aligned,
   but are indented in by the width of the widest even subview.
-
-  The Layout protocol requires the methods `placeSubviews` and `sizeThatFits`.
-  The `sizeThatFits` method determines the width and height
-  required to holds all the subviews in their computed locations.
-  The `placeSubviews` method places each subview
-  at a computed x, y location with a proposed size.
  */
 struct AlternateStackLayout: Layout {
     // This is used to share data between methods in the `Layout` protocol.
@@ -21,6 +15,8 @@ struct AlternateStackLayout: Layout {
         let sizes: [CGSize]
     }
 
+    // This is called first in order to computed data
+    // that can be used by the other methods.
     func makeCache(subviews: Subviews) -> Cache {
         // Get the size of each subview.
         // The type is `[CGSize]`.
@@ -49,6 +45,22 @@ struct AlternateStackLayout: Layout {
         )
     }
 
+    // This is called before `placeSubviews`.
+    // It determines the container width and height required to
+    // hold all the subviews in their computed locations.
+    func sizeThatFits(
+        proposal: ProposedViewSize, // seems to be the entire screen size
+        subviews: Subviews,
+        cache: inout Cache
+    ) -> CGSize {
+        subviews.isEmpty ? .zero : CGSize(
+            width: cache.maxEvenWidth + cache.maxOddWidth,
+            height: cache.sizes.map { $0.height }.reduce(0, +)
+        )
+    }
+
+    // This is called after `sizeThatFits`.
+    // It places each subview at a computed x, y location with a proposed size.
     func placeSubviews(
         in bounds: CGRect,
         proposal: ProposedViewSize, // seems to be the entire screen size
@@ -80,16 +92,5 @@ struct AlternateStackLayout: Layout {
             // the y value of this subview by the height of this subview.
             y += size.height
         }
-    }
-
-    func sizeThatFits(
-        proposal: ProposedViewSize, // seems to be the entire screen size
-        subviews: Subviews,
-        cache: inout Cache
-    ) -> CGSize {
-        subviews.isEmpty ? .zero : CGSize(
-            width: cache.maxEvenWidth + cache.maxOddWidth,
-            height: cache.sizes.map { $0.height }.reduce(0, +)
-        )
     }
 }
