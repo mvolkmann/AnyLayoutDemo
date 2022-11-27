@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1AE6932932C84500C74CD7 /* AlternateStackLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AE6922932C84500C74CD7 /* AlternateStackLayout.swift */; };
 		1A6591AF293280EC000C5E23 /* AnyLayoutDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6591AE293280EC000C5E23 /* AnyLayoutDemoApp.swift */; };
 		1A6591B1293280EC000C5E23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6591B0293280EC000C5E23 /* ContentView.swift */; };
 		1A6591B3293280ED000C5E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A6591B2293280ED000C5E23 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A1AE6922932C84500C74CD7 /* AlternateStackLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateStackLayout.swift; sourceTree = "<group>"; };
 		1A6591AB293280EC000C5E23 /* AnyLayoutDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyLayoutDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A6591AE293280EC000C5E23 /* AnyLayoutDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyLayoutDemoApp.swift; sourceTree = "<group>"; };
 		1A6591B0293280EC000C5E23 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			children = (
 				1A6591AE293280EC000C5E23 /* AnyLayoutDemoApp.swift */,
 				1A6591B0293280EC000C5E23 /* ContentView.swift */,
+				1A1AE6922932C84500C74CD7 /* AlternateStackLayout.swift */,
 				1A6591B2293280ED000C5E23 /* Assets.xcassets */,
 				1A6591B4293280ED000C5E23 /* Preview Content */,
 			);
@@ -139,6 +142,7 @@
 			files = (
 				1A6591B1293280EC000C5E23 /* ContentView.swift in Sources */,
 				1A6591AF293280EC000C5E23 /* AnyLayoutDemoApp.swift in Sources */,
+				1A1AE6932932C84500C74CD7 /* AlternateStackLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
