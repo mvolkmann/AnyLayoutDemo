@@ -34,9 +34,8 @@ struct ContentView: View {
     ]
 
     var body: some View {
-        let layout = AnyLayout(layoutType.layout)
         NavigationStack {
-            layout {
+            AnyLayout(layoutType.layout) {
                 ForEach(boxes, id: \.color) { box in
                     box.color.frame(
                         width: box.width,
