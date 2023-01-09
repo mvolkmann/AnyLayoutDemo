@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A1AE6932932C84500C74CD7 /* AlternateStackLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1AE6922932C84500C74CD7 /* AlternateStackLayout.swift */; };
 		1A1AE6952932E85100C74CD7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1A1AE6942932E85100C74CD7 /* README.md */; };
+		1A1AE6982933B47A00C74CD7 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 1A1AE6972933B47A00C74CD7 /* Inject */; };
 		1A6591AF293280EC000C5E23 /* AnyLayoutDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6591AE293280EC000C5E23 /* AnyLayoutDemoApp.swift */; };
 		1A6591B1293280EC000C5E23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6591B0293280EC000C5E23 /* ContentView.swift */; };
 		1A6591B3293280ED000C5E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A6591B2293280ED000C5E23 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		1A6591B0293280EC000C5E23 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1A6591B2293280ED000C5E23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A6591B5293280ED000C5E23 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1A9D8EDB296C6A46003D1AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A1AE6982933B47A00C74CD7 /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +59,7 @@
 		1A6591AD293280EC000C5E23 /* AnyLayoutDemo */ = {
 			isa = PBXGroup;
 			children = (
+				1A9D8EDB296C6A46003D1AEC /* Info.plist */,
 				1A6591AE293280EC000C5E23 /* AnyLayoutDemoApp.swift */,
 				1A6591B0293280EC000C5E23 /* ContentView.swift */,
 				1A1AE6922932C84500C74CD7 /* AlternateStackLayout.swift */,
@@ -89,6 +93,9 @@
 			dependencies = (
 			);
 			name = AnyLayoutDemo;
+			packageProductDependencies = (
+				1A1AE6972933B47A00C74CD7 /* Inject */,
+			);
 			productName = AnyLayoutDemo;
 			productReference = 1A6591AB293280EC000C5E23 /* AnyLayoutDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +124,9 @@
 				Base,
 			);
 			mainGroup = 1A6591A2293280EC000C5E23;
+			packageReferences = (
+				1A1AE6962933B47A00C74CD7 /* XCRemoteSwiftPackageReference "Inject" */,
+			);
 			productRefGroup = 1A6591AC293280EC000C5E23 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -278,7 +288,7 @@
 				DEVELOPMENT_TEAM = 4BG3523GAZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = AnyLayoutDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -288,6 +298,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = r.mark.volkmann.gmail.com.AnyLayoutDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -307,7 +321,7 @@
 				DEVELOPMENT_TEAM = 4BG3523GAZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = AnyLayoutDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -347,6 +361,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1A1AE6962933B47A00C74CD7 /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1A1AE6972933B47A00C74CD7 /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1A1AE6962933B47A00C74CD7 /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1A6591A3293280EC000C5E23 /* Project object */;
 }
