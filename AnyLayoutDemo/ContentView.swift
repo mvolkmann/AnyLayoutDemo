@@ -45,7 +45,7 @@ struct ContentView: View {
                 }
             }
             .padding()
-            .navigationTitle("AnyLayout Demo")
+            .navigationTitle("AnyLayout Demo Main")
             .animation(.default, value: layoutType)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
