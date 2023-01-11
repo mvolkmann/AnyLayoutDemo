@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var layoutType = LayoutType.h
 
+    // This contains a case for each supported layout.
     enum LayoutType: Int, CaseIterable {
         case h, v, z, alt
 
